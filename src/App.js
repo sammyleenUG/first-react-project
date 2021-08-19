@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Item from './itemSection';
+import Detail from './detailSection';
+import ProductData from './ProductData';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    colorOption: 'https://imgur.com/iOeUBV7.png'
+  };
+
+  selectedOption = (pos)=>{
+      const selected = ProductData.colorOptions[pos].imageUrl;
+      this.setState({colorOption : selected})
+  }
+
+  render(){
+      return (
+        <div className="container">
+           <div className="row">
+              <Item url={this.state.colorOption} />
+              <Detail 
+                title={ProductData.title}
+                description={ProductData.description}
+                styleName={ProductData.colorOptions.styleName}
+                selectedOption={this.selectedOption}
+              />
+           </div>
+        </div>
+     );
+   }
 }
 
 export default App;
